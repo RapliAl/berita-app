@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Post extends Model
 {
     protected $fillable = [
+        'author_id',
+        'categories_id',
         'title',
         'slug',
         'content',
@@ -19,7 +21,7 @@ class Post extends Model
     {
         return $this->belongsTo(Author::class);
     }
-    public function category(): BelongsTo
+    public function categories(): BelongsTo
     {
         return $this->belongsTo(Categories::class);
     }

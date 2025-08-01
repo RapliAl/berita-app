@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')->unique();
+            $table->foreignId('post_id');
             $table->timestamps();
         });
     }

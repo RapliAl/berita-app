@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Banner extends Model
@@ -11,8 +12,8 @@ class Banner extends Model
         'post_id',
     ];
 
-    public function post(): HasOne
+    public function post(): BelongsTo
     {
-        return $this->hasOne(Post::class);
+        return $this->belongsTo(Post::class);
     }
 }

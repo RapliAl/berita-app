@@ -16,6 +16,8 @@ use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -26,6 +28,8 @@ class PostResource extends Resource
     protected static ?string $model = Post::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
+    protected static ?string $navigationGroup = 'Content Management';
+
 
     public static function form(Form $form): Form
     {
@@ -39,7 +43,7 @@ class PostResource extends Resource
                             ->required(),
                         Select::make('categories_id')
                             ->label('Category')
-                            ->relationship('category', 'name')
+                            ->relationship('categories', 'name')
                             ->required(),
                        TextInput::make('title')
                             ->required()
@@ -50,7 +54,7 @@ class PostResource extends Resource
                         TextInput::make('slug')
                             ->readOnly(),
                     ]),
-                Section::make('Content')
+                Section::make('content')
                     ->description('Write your post content below.')
                     ->schema([
                         RichEditor::make('content')
@@ -76,14 +80,37 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                //
+                ImageColumn::make('image_content')
+                    ->label('Image')
+                    ->size(50),
+                TextColumn::make('title')
+                    ->label('Post Title')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('content')
+                    ->label('Content')
+                    ->limit(50)
+                    ->searchable(),
+                TextColumn::make('slug')
+                    ->label('Slug')
+                    ->searchable(),
+                TextColumn::make('author.name')
+                    ->label('Author')
+                    ->searchable(),
+                TextColumn::make('categories.name')
+                    ->label('Category')
+                    ->searchable(),
+                TextColumn::make('published_date')
+                    ->label('Published Date')
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-            ])
+                Tables\Actions\DeleteAction::make(),
+                ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
