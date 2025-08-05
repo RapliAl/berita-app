@@ -28,7 +28,7 @@ class PostResource extends Resource
     protected static ?string $model = Post::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
-    protected static ?string $navigationGroup = 'Content Management';
+    protected static ?string $navigationGroup = 'News Management';
 
 
     public static function form(Form $form): Form
@@ -81,8 +81,7 @@ class PostResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('image_content')
-                    ->label('Image')
-                    ->size(50),
+                    ->label('Image'),
                 TextColumn::make('title')
                     ->label('Post Title')
                     ->searchable()

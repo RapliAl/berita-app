@@ -23,7 +23,7 @@ class CategoriesResource extends Resource
     protected static ?string $model = Categories::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-paper-clip';
-    protected static ?string $navigationGroup = 'Content Management';
+    protected static ?string $navigationGroup = 'News Management';
 
 
     public static function form(Form $form): Form

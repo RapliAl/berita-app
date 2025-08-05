@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
 class Post extends Model
 {
     protected $fillable = [
@@ -19,10 +18,10 @@ class Post extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsTo(Author::class, 'author_id');
     }
     public function categories(): BelongsTo
     {
-        return $this->belongsTo(Categories::class);
+        return $this->belongsTo(Categories::class, 'categories_id');
     }
 }

@@ -7,6 +7,7 @@ use App\Filament\Resources\AuthorResource\RelationManagers;
 use App\Models\Author;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -24,7 +25,7 @@ class AuthorResource extends Resource
     protected static ?string $model = Author::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationGroup = 'Content Management';
+    protected static ?string $navigationGroup = 'News Management';
 
     public static function form(Form $form): Form
     {
@@ -44,6 +45,12 @@ class AuthorResource extends Resource
                             ->url()
                             ->suffixIcon('heroicon-o-magnifying-glass')
                             ->nullable(),
+                        TextArea::make('bio')
+                            ->label('Short Bio')
+                            ->placeholder('Write a brief bio about yourself')
+                            ->maxLength(500)
+                            ->rows(3)
+                            ->columnSpanFull()
                     ]),
                 Section::make('Image Upload')
                     ->description('Upload a profile picture')
